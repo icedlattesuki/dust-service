@@ -1,2 +1,2 @@
 # dust-service
-Backend for the dust
+Backend for the dust platform
