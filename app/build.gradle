@@ -1,0 +1,32 @@
+plugins {
+    id 'application'
+    id "io.freefair.lombok" version "6.4.1"
+}
+
+application {
+    mainClass = 'com.dust.DustApplication'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+    implementation 'org.springframework.boot:spring-boot:2.6.5'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
+
+    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'mysql:mysql-connector-java:8.0.28'
+
+    // https://mvnrepository.com/artifact/org.web3j/core
+    implementation 'org.web3j:core:5.0.0'
+
+    implementation 'com.auth0:java-jwt:3.19.1'
+}
