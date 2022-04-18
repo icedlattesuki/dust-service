@@ -29,4 +29,10 @@ dependencies {
     implementation 'org.web3j:core:5.0.0'
 
     implementation 'com.auth0:java-jwt:3.19.1'
+
+    implementation 'com.qcloud:cos-sts_api:3.1.0'
+
+    implementation 'com.qcloud:cos_api:5.6.73'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
 }

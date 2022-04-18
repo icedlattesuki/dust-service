@@ -5,11 +5,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class SteamInfo {
 
     private String userUuid;
 
-    private String publicAddress;
+    private String steamId;
 
-    private long nonce;
+    private String apiKey;
+
+    private String tradeUrl;
 }

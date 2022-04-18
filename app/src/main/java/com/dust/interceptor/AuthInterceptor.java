@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             String payloadStr = new String(decoder.decode(decodedJWT.getPayload()));
             ObjectMapper mapper = new ObjectMapper();
             Map payload = mapper.readValue(payloadStr, Map.class);
-            request.setAttribute("publicAddress", payload.get("publicAddress"));
+            request.setAttribute("userUuid", payload.get("userUuid"));
             return true;
         } catch (JWTVerificationException exception) {
             return false;

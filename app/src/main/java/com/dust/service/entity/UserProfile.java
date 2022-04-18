@@ -5,11 +5,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class UserProfile {
 
     private String userUuid;
 
     private String publicAddress;
 
-    private long nonce;
+    private String name;
+
+    private String avatarKey;
+
+    private String avatarUrl;
 }

@@ -9,9 +9,9 @@ public class UserDO {
 
     private long id;
 
+    private String uuid;
+
     private String publicAddress;
 
     private long nonce;
-
-    private String name;
 }
