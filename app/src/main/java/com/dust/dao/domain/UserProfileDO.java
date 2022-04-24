@@ -12,4 +12,10 @@ public class UserProfileDO {
     private String name;
 
     private String avatarKey;
+
+    private String steamId;
+
+    private String apiKey;
+
+    private String tradeUrl;
 }

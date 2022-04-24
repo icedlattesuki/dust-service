@@ -1,37 +1,39 @@
 package com.dust.controller;
 
+import com.dust.controller.request.BindSteamIdRequest;
+import com.dust.controller.request.UpdateAvatarRequest;
 import com.dust.controller.response.UserProfileResponse;
-import com.dust.service.SteamService;
 import com.dust.service.UserService;
-import com.dust.service.entity.SteamInfo;
-import com.dust.service.entity.UserProfile;
+import com.dust.service.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
 
     @Autowired
-    private UserService userProfileService;
-
-    @Autowired
-    private SteamService steamService;
+    private UserService userService;
 
     @GetMapping("/api/user/profile")
     public UserProfileResponse getProfile(@RequestAttribute("userUuid") String userUuid) {
-        UserProfile userProfile = userProfileService.getProfile(userUuid);
-        SteamInfo steamInfo = steamService.getSteamInfo(userUuid);
+        User user = userService.getUser(userUuid);
         UserProfileResponse response = new UserProfileResponse();
-        response.setPublicAddress(userProfile.getPublicAddress());
-        response.setName(userProfile.getName());
-        response.setAvatarUrl(userProfile.getAvatarUrl());
-        if (steamInfo != null) {
-            response.setSteamId(steamInfo.getSteamId());
-            response.setApiKey(steamInfo.getApiKey());
-            response.setTradeUrl(steamInfo.getTradeUrl());
-        }
+        response.setPublicAddress(user.getPublicAddress());
+        response.setName(user.getUsername());
+        response.setAvatarUrl(user.getAvatarUrl());
+        response.setSteamId(user.getSteamId());
+        response.setApiKey(user.getApiKey());
+        response.setTradeUrl(user.getTradeUrl());
         return response;
+    }
+
+    @PostMapping("/api/user/avatar")
+    public String updateAvatar(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateAvatarRequest request) {
+        return userService.updateAvatar(userUuid, request.getAvatarKey());
+    }
+
+    @PostMapping("/api/user/steamid")
+    public String bindSteamId(@RequestAttribute("userUuid") String userUuid, @RequestBody BindSteamIdRequest request) {
+        return userService.bindSteamId(userUuid, request.getSteamReturnUrl());
     }
 }

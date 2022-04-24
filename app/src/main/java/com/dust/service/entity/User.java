@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class User extends UserBasic{
 
-    private String userUuid;
+    private String steamId;
 
-    private String publicAddress;
+    private String apiKey;
 
-    private long nonce;
+    private String tradeUrl;
 }
