@@ -1,7 +1,6 @@
 package com.dust.controller;
 
-import com.dust.controller.request.BindSteamIdRequest;
-import com.dust.controller.request.UpdateAvatarRequest;
+import com.dust.controller.request.*;
 import com.dust.controller.response.UserProfileResponse;
 import com.dust.service.UserService;
 import com.dust.service.entity.User;
@@ -32,8 +31,23 @@ public class UserController {
         return userService.updateAvatar(userUuid, request.getAvatarKey());
     }
 
+    @PostMapping("/api/user/username")
+    public void updateUsername(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateUsernameRequest request) {
+        userService.updateUsername(userUuid, request.getUsername());
+    }
+
     @PostMapping("/api/user/steamid")
     public String bindSteamId(@RequestAttribute("userUuid") String userUuid, @RequestBody BindSteamIdRequest request) {
         return userService.bindSteamId(userUuid, request.getSteamReturnUrl());
+    }
+
+    @PostMapping("/api/user/steam-api-key")
+    public void updateSteamApiKey(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateSteamApiKeyRequest request) {
+        userService.updateSteamApiKey(userUuid, request.getSteamApiKey());
+    }
+
+    @PostMapping("/api/user/steam-trade-url")
+    public void updateSteamTradeUrl(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateSteamTradeUrlRequest request) {
+        userService.updateSteamTradeUrl(userUuid, request.getSteamTradeUrl());
     }
 }
