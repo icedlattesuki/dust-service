@@ -26,9 +26,9 @@ public interface UserProfileDao {
     @Update("update user_profile set steam_id=#{steamId} where user_uuid=#{userUuid}")
     int updateSteamId(@Param("userUuid") String userUuid, @Param("steamId") String steamId);
 
-    @Update("update user_profile set steam_api_key=#{steamApiKey} where user_uuid=#{userUuid}")
-    int updateSteamApiKey(@Param("userUuid") String userUuid, @Param("steamApikey") String steamApiKey);
+    @Update("update user_profile set api_key=#{steamApiKey} where user_uuid=#{userUuid}")
+    int updateSteamApiKey(@Param("userUuid") String userUuid, @Param("steamApiKey") String steamApiKey);
 
-    @Update("update user_profile set steam_trade_url=#{steamTradeUrl} where user_uuid=#{userUuid}")
+    @Update("update user_profile set trade_url=#{steamTradeUrl} where user_uuid=#{userUuid}")
     int updateSteamTradeUrl(@Param("userUuid") String userUuid, @Param("steamTradeUrl") String steamTradeUrl);
 }
