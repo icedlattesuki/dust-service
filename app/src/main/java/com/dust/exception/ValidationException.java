@@ -1,6 +1,13 @@
 package com.dust.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ValidationException extends RuntimeException {
 
-    private String errorMessage;
+    public ValidationException(String message) {
+        super(message);
+    }
 }

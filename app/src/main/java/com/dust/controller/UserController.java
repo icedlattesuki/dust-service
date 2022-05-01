@@ -20,6 +20,7 @@ public class UserController {
         User user = userService.getUser(userUuid);
         UserProfileResponse response = new UserProfileResponse();
         response.setPublicAddress(user.getPublicAddress());
+        response.setUserUuid(user.getUserUuid());
         response.setName(user.getUsername());
         response.setAvatarUrl(user.getAvatarUrl());
         response.setSteamId(user.getSteamId());
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/api/user/avatar")
-    public String updateAvatar(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateAvatarRequest request) {
+    public String updateAvatar(@RequestAttribute("userUuid") String userUuid, @RequestBody @Valid UpdateAvatarRequest request) {
         return userService.updateAvatar(userUuid, request.getAvatarKey());
     }
 
@@ -39,17 +40,17 @@ public class UserController {
     }
 
     @PostMapping("/api/user/steamid")
-    public String bindSteamId(@RequestAttribute("userUuid") String userUuid, @RequestBody BindSteamIdRequest request) {
+    public String bindSteamId(@RequestAttribute("userUuid") String userUuid, @RequestBody @Valid BindSteamIdRequest request) {
         return userService.bindSteamId(userUuid, request.getSteamReturnUrl());
     }
 
     @PostMapping("/api/user/steam-api-key")
-    public void updateSteamApiKey(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateSteamApiKeyRequest request) {
+    public void updateSteamApiKey(@RequestAttribute("userUuid") String userUuid, @RequestBody @Valid UpdateSteamApiKeyRequest request) {
         userService.updateSteamApiKey(userUuid, request.getSteamApiKey());
     }
 
     @PostMapping("/api/user/steam-trade-url")
-    public void updateSteamTradeUrl(@RequestAttribute("userUuid") String userUuid, @RequestBody UpdateSteamTradeUrlRequest request) {
+    public void updateSteamTradeUrl(@RequestAttribute("userUuid") String userUuid, @RequestBody @Valid UpdateSteamTradeUrlRequest request) {
         userService.updateSteamTradeUrl(userUuid, request.getSteamTradeUrl());
     }
 }

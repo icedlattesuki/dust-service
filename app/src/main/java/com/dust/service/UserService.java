@@ -4,6 +4,8 @@ import com.dust.dao.UserDao;
 import com.dust.dao.UserProfileDao;
 import com.dust.dao.domain.UserDO;
 import com.dust.dao.domain.UserProfileDO;
+import com.dust.exception.InternalException;
+import com.dust.exception.ValidationException;
 import com.dust.infra.ObjectStorageManager;
 import com.dust.service.entity.User;
 import com.dust.service.entity.UserBasic;
@@ -54,23 +56,38 @@ public class UserService {
     }
 
     public void updateUsername(String userUuid, String username) {
+        if (userProfileDao.getByName(username) != null) {
+            throw new ValidationException("用户名已被使用");
+        }
         userProfileDao.updateUsername(userUuid, username);
     }
 
     public String bindSteamId(String userUuid, String steamReturnUrl) {
+        String steamId = getSteamId(steamReturnUrl);
+
+        if (!StringUtils.hasText(steamId)) {
+            throw new ValidationException("无效的URL");
+        }
+
+        if (userProfileDao.getBySteamId(steamId) != null) {
+            throw new ValidationException("该Steam账号已被绑定");
+        }
+
+        boolean isValid = false;
+
         try {
-            if (!verifySteamReturnUrl(steamReturnUrl)) {
-                return null;
-            }
-            String steamId = getSteamId(steamReturnUrl);
-            if (StringUtils.hasText(steamId)) {
-                userProfileDao.updateSteamId(userUuid, steamId);
-            }
-            return steamId;
+            isValid = verifySteamReturnUrl(steamReturnUrl);
         } catch (Exception e) {
             LOGGER.error("fail to bind steam id", e);
-            return null;
+            throw new InternalException("无法验证Steam");
         }
+
+        if (!isValid) {
+            throw new ValidationException("Steam验证失败");
+        }
+
+        userProfileDao.updateSteamId(userUuid, steamId);
+        return steamId;
     }
 
     public void updateSteamApiKey(String userUuid, String steamApiKey) {

@@ -17,6 +17,22 @@ public interface UserProfileDao {
     @Result(column = "trade_url", property = "tradeUrl")
     UserProfileDO get(@Param("userUuid") String userUuid);
 
+    @Select("select * from user_profile where name=#{name}")
+    @Result(column = "user_uuid", property = "userUuid")
+    @Result(column = "avatar_key", property = "avatarKey")
+    @Result(column = "steam_id", property = "steamId")
+    @Result(column = "api_key", property = "apiKey")
+    @Result(column = "trade_url", property = "tradeUrl")
+    UserProfileDO getByName(@Param("name") String name);
+
+    @Select("select * from user_profile where steam_id=#{steamId}")
+    @Result(column = "user_uuid", property = "userUuid")
+    @Result(column = "avatar_key", property = "avatarKey")
+    @Result(column = "steam_id", property = "steamId")
+    @Result(column = "api_key", property = "apiKey")
+    @Result(column = "trade_url", property = "tradeUrl")
+    UserProfileDO getBySteamId(@Param("steamId") String steamId);
+
     @Update("update user_profile set avatar_key=#{avatarKey} where user_uuid=#{userUuid}")
     int updateAvatar(@Param("userUuid") String userUuid, @Param("avatarKey") String avatarKey);
 

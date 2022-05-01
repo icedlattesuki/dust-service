@@ -9,6 +9,8 @@ public class UserProfileResponse {
 
     private String publicAddress;
 
+    private String userUuid;
+
     private String name;
 
     private String avatarUrl;
