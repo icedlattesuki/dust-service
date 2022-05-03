@@ -31,6 +31,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleInternalException(InternalException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("errorMessage", e.getMessage());
-        return ResponseEntity.badRequest().body(map);
+        return ResponseEntity.internalServerError().body(map);
     }
 }
