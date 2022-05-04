@@ -27,9 +27,4 @@ public class AuthController {
         cookie.setMaxAge(Integer.MAX_VALUE);
         response.addCookie(cookie);
     }
-
-    @GetMapping(path = "/api/test")
-    public void test(@RequestAttribute("publicAddress") String publicAddress) {
-        System.out.println(publicAddress);
-    }
 }
