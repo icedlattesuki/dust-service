@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/api/auth/nonce").permitAll()
             .antMatchers("/api/auth/login").permitAll()
+            .antMatchers("/api/inventory").permitAll()
             .anyRequest().authenticated();
         http.addFilterBefore(jwtFilter, RequestCacheAwareFilter.class);
     }
