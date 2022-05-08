@@ -1,22 +1,22 @@
 package com.dust.controller;
 
-import com.dust.gateway.SteamGateway;
+import com.dust.service.ItemService;
+import com.dust.service.entity.item.ItemDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 public class ItemController {
 
     @Autowired
-    private SteamGateway steamGateway;
+    private ItemService itemService;
 
     @GetMapping("/api/inventory")
-    public void getInventory(@RequestParam("steamId") String steamId) throws URISyntaxException, IOException, InterruptedException {
-        steamGateway.getInventory(steamId);
+    public List<ItemDetails> getInventory(@RequestParam("steamId") String steamId) {
+        return itemService.getInventory(steamId);
     }
 }

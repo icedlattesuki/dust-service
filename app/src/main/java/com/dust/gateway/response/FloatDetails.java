@@ -1,0 +1,18 @@
+package com.dust.gateway.response;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FloatDetails {
+
+    @JsonProperty("floatvalue")
+    private float floatValue;
+
+    @JsonProperty("imageurl")
+    private String imageUrl;
+}
